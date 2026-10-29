@@ -92,3 +92,6 @@ jupyter notebook notebooks/03_policy.ipynb    # Capacity planning policy & headr
 - **Multi-Metric Rigor**: Evaluated across 8 complementary metrics: MAE, RMSE, sMAPE, Normalized MAE, Relative Improvement, Peak Load MAE (Top 20%), Max Absolute Error, and Mean Bias Error.
 - **5-Pillar Operational Policy**: Directly fulfills Section G recommendations by combining Safety Margins, Forecast Thresholds, Lead-Time Uncertainty Bands, Peak-Risk Velocity Triggers, and Workload-Segment Rules (partitioning Interactive vs Delay-Insensitive workloads from `vm_metadata.csv.gz`). Achieves a 0.0% SLA breach rate on the holdout, enables a safe **10.55 : 1** datacenter overcommitment ratio, and slashes physical server footprint by **90.5%**.
 - **Pure Starter Utilities**: Employs strictly the provided `cwfc.baselines`, `cwfc.metrics`, and `cwfc.validation` utilities with no artificial internal modules.
+
+## Auther
+Tanishq Gupta
