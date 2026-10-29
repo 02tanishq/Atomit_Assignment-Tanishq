@@ -1,0 +1,35 @@
+# Virtual environments
+.venv/
+env/
+venv/
+ENV/
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# IDE and Editor artifacts
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large uncompressed derived datasets (preserve compressed .gz starter files)
+Dataset/*.csv
+Dataset/*.parquet
+scratch/
+
+# Credentials and secrets
+*.env
+*.pem
+*.key
+credentials.json
