@@ -1,0 +1,10 @@
+Check,Value,Status
+Total CPU Readings Rows,"1,340,000","PASS (Exact 1,340,000)"
+Unique VMs (Readings),"10,000","PASS (Exact 10,000)"
+Unique VMs (Metadata),"10,000","PASS (Exact 10,000)"
+Total Timestamps,134,PASS (Exact 134 steps)
+Cadence Step Intervals,[300] sec,PASS (Strictly 300s / 5m)
+Missing / Null Values,0,PASS (0 nulls)
+Duplicate Records,0,PASS (0 duplicates)
+"Physical Bounds [0, 100]%",0,PASS (100% within bounds)
+Hierarchy Invariant (min <= avg <= max),0,PASS (0 violations)

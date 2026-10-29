@@ -1,0 +1,7 @@
+Component,Variance,Span (Max-Min),Std Dev
+Observed Series,0.03713,0.8005 pp,0.1927 pp
+Trend Component,0.02186,0.6378 pp,0.1479 pp
+Seasonal Component (Hourly),0.00828,0.4180 pp,0.0910 pp
+Remainder (Noise),0.00357,0.4085 pp,0.0597 pp
+Seasonal Strength Fs,0.7018,Relative,-
+Trend Strength Ft,0.8773,Relative,-

@@ -1,0 +1,11 @@
+Metric,Value
+Individual VM avg_cpu Mean,9.39%
+Individual VM avg_cpu Median,5.11%
+Individual VM avg_cpu P95,37.13%
+Individual VM max_cpu P95,65.64%
+Individual VM Standard Deviation,14.27 pp
+Fleet Aggregate Standard Deviation,0.1927 pp
+Multiplexing Variance Reduction Ratio,74.0x reduction
+Individual VM Lag-1 Autocorrelation (Median),0.0699
+Fleet Aggregate Lag-1 Autocorrelation,0.6621
+Mean Pairwise VM Cross-Correlation,0.0028

@@ -1,0 +1,5 @@
+Series,Test,Stat,p-value,Crit 5%,Inference
+Level (Aggregate CPU),ADF (Unit Root),-1.7348,0.4133,-2.8918,Cannot reject unit root (p = 0.413)
+Level (Aggregate CPU),KPSS (Stationarity),0.3075,0.1,0.463,Cannot reject stationarity (p >= 0.100)
+First Difference (Δ CPU),ADF (Unit Root),-2.6808,0.0774,-2.8918,Borderline stationary (p = 0.080)
+First Difference (Δ CPU),KPSS (Stationarity),0.1406,0.1,0.463,Strictly stationary (p >= 0.100)

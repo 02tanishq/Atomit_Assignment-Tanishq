@@ -1,0 +1,10 @@
+Metric,Value
+Training Observations,110 steps (9.17 hours)
+Fleet Mean CPU,9.4141%
+Fleet Standard Deviation,0.1927 pp
+Fleet Minimum CPU,9.1116% (Hour 9.08)
+Fleet Maximum CPU,9.9122% (Hour 4.58)
+Dynamic Range (Max - Min),0.8005 pp
+OLS Linear Slope,"-0.01269 pp/hour (p = 0.0686, R² = 0.0304)"
+Theil-Sen Robust Slope,"-0.01758 pp/hour (95% CI: [-0.02807, -0.00544])"
+Kendall's Tau Rank Correlation,tau = -0.1837 (p = 0.0045)

@@ -1,0 +1,6 @@
+Lag,Lag (Minutes),LB Test Stat,p-value,Conclusion
+3,15,140.63,2.7640e-30,Reject White Noise (p < 0.001)
+6,30,224.345,1.2321e-45,Reject White Noise (p < 0.001)
+12,60,291.147,3.3841e-55,Reject White Noise (p < 0.001)
+18,90,295.788,3.5364e-52,Reject White Noise (p < 0.001)
+24,120,310.914,1.0569e-51,Reject White Noise (p < 0.001)

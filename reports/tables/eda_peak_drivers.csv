@@ -1,0 +1,8 @@
+Metric,Value
+Peak Episode Threshold (P80),9.5545%
+Low Load Threshold (P20),9.2574%
+Fleet Rise from Non-Peak to Peak,0.3852 pp
+Median VM Change During Peak,0.0112 pp (Virtually unchanged)
+Share of Fleet with Positive Increase,52.0% (50/50 split)
+Top 100 VMs Mean Surge,+21.50 pp per VM
+Top 100 VMs (1%) Share of Total Fleet Rise,55.83%

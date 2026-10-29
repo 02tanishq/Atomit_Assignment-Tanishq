@@ -1,0 +1,12 @@
+Domain,Finding,Operational / Modeling Implication
+1. Data Integrity,"Balanced 11.1h panel, 134 steps, 10,000 VMs, 0 nulls, 0 duplicates",Validates exact 5-min cadence; clean pipeline without interpolation.
+2. Churn & Target 1,"0 VM creations, 0 VM deletions within window (active_vm_count = 10,000)","Persistence forecast (10,000) for active_vm_count is mathematically exact (MAE=0)."
+3. Fleet Demand Range,"Mean = 9.41%, std = 0.19 pp, dynamic range = 0.80 pp (9.11% - 9.91%)",Static sizing wastes 90% capacity; dynamic capacity saves massive costs.
+4. Long-Run Drift,"Negative drift of -0.017 pp/hour (Theil-Sen slope, p < 0.05)",Long-range forecasts must incorporate slight mean-reverting downward drift.
+5. Stationarity & Signal,Variance plateaus at noise asymptote (0.28 pp) instead of Random Walk (0.77 pp),Proves bounded mean reversion; avoid second-order differencing.
+6. Memory Dynamics,"Strong AR memory (lag-1 r=0.66, lag-2 r=0.59, lag-3 r=0.66)",Directly justifies AR(1)-AR(3) features and autoregressive models.
+7. Periodicity,"Dominant 60-min cycle (Fs = 0.70); dip at min 20 (-0.21 pp), rebound at min 25 (+0.14 pp)",Hourly batch/cron jobs require seasonal_lag_12 feature and hourly profile baseline.
+8. Multiplexing & Inequality,1% VMs generate 34% variance; 10% generate 87.1% variance; fleet std reduced by 71x,Central Limit Theorem enables 3x-4x host overcommitment with low aggregate risk.
+9. Tenant Topology,"2,359 deployments; intra-deployment cross-correlation is 45x higher than inter-deployment",Anti-affinity scheduling required to prevent co-locating synchronized VMs on same host.
+10. Peak Episode Drivers,Upper tail shifts (+2.91 pp at P95); top 100 VMs (1%) drive 55.8% of fleet rise,Fleet surges stem from heavy-tail bursts in tiny minority; monitor P95/P99 metrics.
+11. Workload Segments,Interactive VMs run hotter (11.5%) with 6.4x burst; >24-core VMs have 14.4x burst,Interactive workloads require dynamic safety buffer; Delay-insensitive can pack tightly.
