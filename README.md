@@ -30,13 +30,27 @@ A production-ready solution for the [Atomity Cloud Workload Forecasting Challeng
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
+
+# Option A: Install editable package with dev dependencies (recommended)
 pip install -e ".[dev]"
+
+# Option B: Standard requirements.txt installation
+pip install -r requirements.txt
+pip install -e .
 ```
 
 ### 2. Dataset Setup
-Ensure raw data is extracted in `Dataset/`:
+In strict adherence to the challenge rules (**SUBMISSION.md**: *"Do not commit large derived datasets or copies of the upstream Azure release"*), the ~110MB raw telemetry files are not tracked in git.
+
+To reproduce predictions or run the notebooks, ensure the challenge release data (`data-v1.tar.gz` from the official release) is extracted into `Dataset/` or `challenge_data/`:
+```bash
+# If extracting from release archive:
+mkdir -p Dataset
+tar -xzf data-v1.tar.gz -C Dataset
 ```
-Dataset/
+Expected file layout:
+```text
+Dataset/ (or challenge_data/)
 ├── vm_cpu_readings.csv.gz    # 1.34M measurement rows (timestamp, vm_id, min_cpu, max_cpu, avg_cpu)
 └── vm_metadata.csv.gz        # VM metadata (vm_id, category, deployment_id, etc.)
 ```
@@ -44,9 +58,10 @@ Dataset/
 ### 3. Generate Submission Artifact
 Reproduce `predictions.csv` directly using the production forecasting CLI:
 ```bash
+# Accepts either Dataset/ or challenge_data/ automatically:
 python -m cwfc.predict --data Dataset --output predictions.csv
 ```
-*Note: The CLI is fully dynamic and smoke-test ready. It supports directories or individual `.csv` / `.csv.gz` files, dynamically infers fleet size and timestamps without hard-coding, and enforces all contract requirements (24 rows, schema, bounds).*
+*Note: The CLI is fully dynamic and smoke-test ready. It supports directories (`Dataset/`, `challenge_data/`) or individual `.csv` / `.csv.gz` files, dynamically infers fleet size and timestamps without hard-coding, and enforces all contract requirements (24 rows, schema, bounds).*
 
 Alternatively, you can run the test suite to verify contract validation:
 ```bash
@@ -64,24 +79,33 @@ jupyter notebook notebooks/03_policy.ipynb    # Capacity planning policy & headr
 
 ## Repository Structure
 
-```
+```text
 .
-├── Dataset/                     # Raw traces (vm_cpu_readings.csv.gz, vm_metadata.csv.gz)
+├── DATA_CARD.md                 # Dataset documentation & provenance
 ├── notebooks/
 │   ├── 01_eda.ipynb             # Exploratory Data Analysis (16 figures, 13 tables)
 │   ├── 02_modeling.ipynb        # Feature engineering, XGBoost & multi-model evaluation, native plots
 │   └── 03_policy.ipynb          # Headroom curves, burst risk detection, capacity policy
+├── predictions.csv              # 24-step submission artifact (dynamic range 9.03% to 9.47%)
+├── pyproject.toml               # Package build specification & dependencies
+├── README.md                    # Project documentation & reproduction guide
 ├── reports/
-│   ├── final_report.md          # Comprehensive technical report
+│   ├── final_report.md          # Comprehensive technical report (9 required sections)
 │   ├── figures/                 # Generated PNG figures (eda_*, mod_*, pol_*)
 │   └── tables/                  # Generated CSV scorecards and summaries
-├── src/cwfc/                    # Official candidate starter package
+├── requirements.txt             # Environment dependencies for pip
+├── src/cwfc/                    # Official candidate package & production CLI
+│   ├── __init__.py
 │   ├── baselines.py             # Persistence & Seasonal-Naive implementations
 │   ├── metrics.py               # MAE, RMSE, sMAPE, Normalized MAE
+│   ├── predict.py               # Production CLI (python -m cwfc.predict)
 │   └── validation.py            # Rolling-origin expanding-window split generators
-├── predictions.csv              # 24-step submission artifact (dynamic range 9.03% to 9.47%)
-└── README.md
+└── tests/                       # Automated test suite (all passing)
+    ├── test_metrics.py
+    ├── test_predict.py          # Contract compliance unit test
+    └── test_validation.py
 ```
+*(Note: Raw telemetry files `Dataset/vm_cpu_readings.csv.gz` and `vm_metadata.csv.gz` are intentionally uncommitted per repository hygiene guidelines).*
 
 ---
 
@@ -92,6 +116,3 @@ jupyter notebook notebooks/03_policy.ipynb    # Capacity planning policy & headr
 - **Multi-Metric Rigor**: Evaluated across 8 complementary metrics: MAE, RMSE, sMAPE, Normalized MAE, Relative Improvement, Peak Load MAE (Top 20%), Max Absolute Error, and Mean Bias Error.
 - **5-Pillar Operational Policy**: Directly fulfills Section G recommendations by combining Safety Margins, Forecast Thresholds, Lead-Time Uncertainty Bands, Peak-Risk Velocity Triggers, and Workload-Segment Rules (partitioning Interactive vs Delay-Insensitive workloads from `vm_metadata.csv.gz`). Achieves a 0.0% SLA breach rate on the holdout, enables a safe **10.55 : 1** datacenter overcommitment ratio, and slashes physical server footprint by **90.5%**.
 - **Pure Starter Utilities**: Employs strictly the provided `cwfc.baselines`, `cwfc.metrics`, and `cwfc.validation` utilities with no artificial internal modules.
-
-## Auther
-Tanishq Gupta
