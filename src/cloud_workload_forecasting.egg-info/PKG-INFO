@@ -1,9 +1,0 @@
-Metadata-Version: 2.4
-Name: cloud-workload-forecasting
-Version: 1.0.0
-Summary: Candidate starter utilities for a cloud workload forecasting take-home
-Requires-Python: >=3.11
-Requires-Dist: numpy>=1.26
-Requires-Dist: pandas>=2.0
-Provides-Extra: dev
-Requires-Dist: pytest>=8.0; extra == "dev"
